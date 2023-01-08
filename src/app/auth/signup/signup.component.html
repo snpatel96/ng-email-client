@@ -1,5 +1,5 @@
 <h3>Create an Account</h3>
-<form class="ui form" [formGroup]="signupForm">
+<form class="ui form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
   <app-input
     inputType="text"
     [label]="'Username'"
@@ -27,10 +27,13 @@
     <p *ngIf="signupForm.errors?.['passwordDontMatch']">
       Password and Password Confirmation don't Match
     </p>
+    <p *ngIf="signupForm.errors?.['noConnection']">
+      No Internet connection detected, failed to sign up
+    </p>
+    <p *ngIf="signupForm.errors?.['unknownError']">User Failed to sign up</p>
   </div>
 
   <div>
     <button class="ui submit button primary">Submit</button>
   </div>
-  {{ signupForm.errors | json }}
 </form>

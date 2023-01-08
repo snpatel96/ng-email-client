@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService, SignupCredentials } from '../auth.service';
 import { MatchPassword } from '../validators/match-password';
 import { UniqueUsername } from '../validators/unique-username';
 
@@ -37,6 +38,26 @@ export class SignupComponent {
 
   constructor(
     private matchPassword: MatchPassword,
-    private uniqueUsername: UniqueUsername
+    private uniqueUsername: UniqueUsername,
+    private authService: AuthService
   ) {}
+
+  onSubmit() {
+    if (this.signupForm.invalid) return;
+    this.authService
+      .signup(this.signupForm.value as SignupCredentials)
+      .subscribe({
+        next: (res) => {
+          // Navigate to some other route
+        },
+        error: (err) => {
+          if (!err.status) {
+            this.signupForm.setErrors({ noConnection: true });
+          } else {
+            this.signupForm.setErrors({ unknownError: true });
+          }
+          console.log(err);
+        },
+      });
+  }
 }

@@ -1,1 +1,16 @@
-<router-outlet></router-outlet>
+<div class="ui container">
+  <div class="ui secondary pointing menu">
+    <a routerLink="/" class="item">Angulae Email</a>
+    <div class="right menu">
+      <a routerLink="/inbox" routerLinkActive="active" class="ui item">Inbox</a>
+      <a routerLink="/signout" routerLinkActive="active" class="ui item"
+        >Sign Out</a
+      >
+      <a routerLink="/" routerLinkActive="active" class="ui item">Sign In</a>
+      <a routerLink="/signup" routerLinkActive="active" class="ui item"
+        >Sign Up</a
+      >
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
