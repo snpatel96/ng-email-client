@@ -12,6 +12,11 @@ export interface SignupCredentials {
   passwordConfirmation: string;
 }
 
+export interface SigninCredentials {
+  username: string;
+  password: string;
+}
+
 interface SignupResponse {
   username: string;
 }
@@ -42,6 +47,12 @@ export class AuthService {
   signup(credentials: SignupCredentials) {
     return this.http
       .post<SignupResponse>(`${this.rootUrl}/auth/signup`, credentials)
+      .pipe(tap(() => this.signedin$.next(true)));
+  }
+
+  signin(credentials: SigninCredentials) {
+    return this.http
+      .post<SigninCredentials>(`${this.rootUrl}/auth/signin`, credentials)
       .pipe(tap(() => this.signedin$.next(true)));
   }
 
