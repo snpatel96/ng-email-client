@@ -8,8 +8,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent,
     children: [
       {
         path: 'not-found',
@@ -27,6 +25,8 @@ const routes: Routes = [
         component: PlaceholderComponent,
       },
     ],
+    path: '',
+    component: HomeComponent,
   },
 ];
 
